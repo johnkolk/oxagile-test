@@ -1,5 +1,11 @@
+import Filter from "@/components/Filter/Filter";
+
 const MainPage: React.FC = () => {
-  return <h1 className="text-3xl font-bold underline">Hello world!</h1>;
+  return (
+    <div className="container">
+      <Filter />
+    </div>
+  );
 };
 
 export default MainPage;
