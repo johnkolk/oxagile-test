@@ -11,9 +11,13 @@ const MovieList: React.FC = () => {
     dispatch(moviesActions.startFetching());
   }, []);
 
+  const onPress = () => {
+    console.log("Card Press");
+  };
+
   if (loading) return <>Loading...</>;
 
-  return <Grid items={movies} />;
+  return <Grid items={movies} onPress={onPress} />;
 };
 
 export default MovieList;

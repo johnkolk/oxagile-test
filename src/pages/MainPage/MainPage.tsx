@@ -4,7 +4,7 @@ import MovieList from "./components/MovieList";
 
 const MainPage: React.FC = () => {
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto py-10">
       <Filter />
       <MovieList />
     </div>

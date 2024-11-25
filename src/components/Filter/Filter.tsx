@@ -29,7 +29,7 @@ const Filter: React.FC = () => {
   };
 
   return (
-    <nav className="flex justify-center space-x-10 py-4 my-6">
+    <nav className="flex justify-center space-x-10 py-4 mb-10">
       {filters.map((item) => (
         <FilterItem
           key={item.id}
