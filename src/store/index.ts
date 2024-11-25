@@ -1,5 +1,6 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import moviesSlice from "./slices/moviesSlice";
+import movieSlice from "./slices/movieSlice";
 import createSagaMiddleware from "redux-saga";
 import rootSaga from "./sagas";
 
@@ -7,6 +8,7 @@ const sagaMiddleware = createSagaMiddleware();
 
 const rootReducer = combineReducers({
   movies: moviesSlice,
+  movie: movieSlice,
 });
 
 export const store = configureStore({

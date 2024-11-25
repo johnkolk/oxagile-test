@@ -23,7 +23,7 @@ const MovieCard: React.FC<Props> = ({ item, onPress }: Props) => {
         onClick={onPress}
       >
         <img className="w-full" src={imagePath} alt={title} />
-        <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black via-black/70 to-transparent text-white text-center px-2 py-3 font-bold">
+        <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black via-black/70 to-transparent text-white text-center px-2 py-4 font-bold">
           {title}
         </div>
       </div>

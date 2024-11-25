@@ -11,6 +11,11 @@ export const fetchMovies = async (filter: FilterItemType): Promise<Movie[]> => {
   return data.results;
 };
 
+export const fetchMovie = async (id: number): Promise<Movie[]> => {
+  const { data } = await apiClient.get(`/movie/${id}`);
+  return data;
+};
+
 const getFavoritesMovies = (): Movie[] => {
   console.log("Get Favorites Movies");
   return [];

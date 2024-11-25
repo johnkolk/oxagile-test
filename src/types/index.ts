@@ -4,6 +4,7 @@ export interface Movie {
   poster_path: string;
   backdrop_path: string;
   adult: string;
+  overview: string;
 }
 
 export enum FilterItemEnum {
