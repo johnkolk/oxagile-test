@@ -11,11 +11,16 @@ interface PageProps {
 }
 
 const Layout = ({ children, className }: PageProps) => {
-  const { ref, focusKey } = useFocusable();
+  const { ref, focusKey } = useFocusable({
+    saveLastFocusedChild: true,
+  });
 
   return (
     <FocusContext.Provider value={focusKey}>
-      <div ref={ref} className={cn("container mx-auto", className)}>
+      <div
+        ref={ref}
+        className={cn("w-full bg-slate-950 min-h-screen", className)}
+      >
         {children}
       </div>
     </FocusContext.Provider>

@@ -5,8 +5,8 @@ import Layout from "@/components/Layout/Layout";
 
 const MainPage: React.FC = () => {
   return (
-    <Layout className="py-10">
-      <Filter focusKey="MENU" />
+    <Layout className="py-20">
+      <Filter />
       <MovieList />
     </Layout>
   );

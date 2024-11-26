@@ -33,9 +33,9 @@ const MovieCard: React.FC<Props> = ({ item, onPress, onFocus }: Props) => {
   );
 
   const className = cn([
-    "flex flex-col overflow-hidden rounded-lg shadow-lg w-60 h-80 cursor-pointer transition-transform transform hover:scale-110",
+    "flex flex-col overflow-hidden border-white rounded-lg shadow-lg cursor-pointer transition-all transition-transform transform hover:scale-125 hover:z-10 hover:border-1 hover:border-gray-800",
     {
-      "scale-110": focused,
+      "scale-125 z-10 border-gray-700 border-1 shadow-lg": focused,
     },
   ]);
 

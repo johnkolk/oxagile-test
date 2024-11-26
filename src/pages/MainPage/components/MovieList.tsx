@@ -22,7 +22,11 @@ const MovieList: React.FC = () => {
   if (loading) <Loader />;
   if (error) <div>Error {error}</div>;
 
-  return <Grid items={movies} onPress={onPress} />;
+  return (
+    <div className="container mx-auto">
+      <Grid items={movies} onPress={onPress} />
+    </div>
+  );
 };
 
 export default MovieList;

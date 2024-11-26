@@ -12,7 +12,7 @@ interface Props {
 }
 
 const Grid: React.FC<Props> = ({ items, onPress }: Props) => {
-  const { ref, focusKey } = useFocusable({ saveLastFocusedChild: true });
+  const { ref, focusKey } = useFocusable();
 
   const onMovieFocus = useCallback(({ y }: { y: number }) => {
     window.scrollTo({
@@ -27,7 +27,7 @@ const Grid: React.FC<Props> = ({ items, onPress }: Props) => {
 
   return (
     <FocusContext.Provider value={focusKey}>
-      <div ref={ref} className="flex flex-wrap gap-5 justify-center">
+      <div ref={ref} className="grid grid-cols-6 gap-6">
         {items.map((item) => (
           <MovieCard
             key={item.id}

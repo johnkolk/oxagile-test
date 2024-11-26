@@ -7,9 +7,7 @@ import { store } from "@/store";
 import "./index.css";
 import { init } from "@noriginmedia/norigin-spatial-navigation";
 
-init({
-  // options
-});
+init();
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
