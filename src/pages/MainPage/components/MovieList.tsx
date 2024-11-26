@@ -6,7 +6,7 @@ import Loader from "@/components/Loader/Loader";
 
 const MovieList: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { movies, loading } = useAppSelector(selectMoviesState);
+  const { movies, loading, error } = useAppSelector(selectMoviesState);
 
   useEffect(() => {
     dispatch(moviesActions.startFetching());
@@ -17,6 +17,7 @@ const MovieList: React.FC = () => {
   };
 
   if (loading) <Loader />;
+  if (error) <div>Error {error}</div>;
 
   return <Grid items={movies} onPress={onPress} />;
 };

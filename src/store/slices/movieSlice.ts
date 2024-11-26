@@ -5,21 +5,19 @@ interface MovieState {
   loading: boolean;
   error: string | null;
   item: Movie | null;
-  favorite: boolean;
 }
 
 const initialState: MovieState = {
   loading: false,
   error: null,
   item: null,
-  favorite: false,
 };
 
 const movieSlice = createSlice({
   name: "movie",
   initialState,
   reducers: {
-    startFetching: (state, { payload }: PayloadAction<Movie["id"]>) => {
+    startFetching: (state, action: PayloadAction<Movie["id"]>) => {
       state.loading = true;
       state.error = null;
     },
@@ -31,17 +29,13 @@ const movieSlice = createSlice({
       state.loading = false;
       state.error = action.payload.message;
     },
-    toggleFavorite: (state) => {
-      state.favorite = !state.favorite;
-    },
   },
   selectors: {
     selectMovieState: (state) => state,
-    selectMovie: (state) => state.item,
   },
 });
 
 export const movieActions = movieSlice.actions;
-export const { selectMovieState, selectMovie } = movieSlice.selectors;
+export const { selectMovieState } = movieSlice.selectors;
 
 export default movieSlice.reducer;

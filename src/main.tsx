@@ -5,6 +5,11 @@ import { Provider } from "react-redux";
 import { router } from "@/router";
 import { store } from "@/store";
 import "./index.css";
+import { init } from "@noriginmedia/norigin-spatial-navigation";
+
+init({
+  // options
+});
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

@@ -12,6 +12,7 @@ import {
 } from "@/services/movieApi";
 import { StarIcon } from "@/components/StarIcon/StarIcon";
 import Loader from "@/components/Loader/Loader";
+import Layout from "@/components/Layout/Layout";
 
 const DetailsPage: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -35,11 +36,10 @@ const DetailsPage: React.FC = () => {
     else addToFavorites(item);
 
     setFavoriteMovie(!favoriteMovie);
-    // dispatch(movieActions.toggleFavorite());
   };
 
   return (
-    <>
+    <Layout>
       <BackdropImage path={item.backdrop_path} />
       <div className="absolute bg-gradient bg-black w-full h-full opacity-75" />
 
@@ -72,7 +72,7 @@ const DetailsPage: React.FC = () => {
           </div>
         </div>
       </div>
-    </>
+    </Layout>
   );
 };
 

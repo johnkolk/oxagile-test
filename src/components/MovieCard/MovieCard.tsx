@@ -4,6 +4,8 @@ import { useMemo } from "react";
 import { Link } from "react-router-dom";
 import { StarIcon } from "../StarIcon/StarIcon";
 import { isFavorite } from "@/services/movieApi";
+import { useFocusable } from "@noriginmedia/norigin-spatial-navigation";
+import { cn } from "@/utils/utils";
 
 type Props = {
   item: Movie;
@@ -11,6 +13,7 @@ type Props = {
 };
 
 const MovieCard: React.FC<Props> = ({ item, onPress }: Props) => {
+  const { ref, focused } = useFocusable();
   const { id, title, poster_path } = item;
 
   const imagePath = useMemo(
@@ -18,12 +21,16 @@ const MovieCard: React.FC<Props> = ({ item, onPress }: Props) => {
     [poster_path]
   );
 
+  const className = cn([
+    "flex flex-col overflow-hidden rounded-lg shadow-lg w-60 h-80 cursor-pointer transition-transform transform hover:scale-110",
+    {
+      "scale-110": focused,
+    },
+  ]);
+
   return (
     <Link to={`/details/${id}`}>
-      <div
-        className="flex flex-col overflow-hidden rounded-lg shadow-lg w-60 h-80 cursor-pointer transition-transform transform hover:scale-110"
-        onClick={onPress}
-      >
+      <div ref={ref} className={className} onClick={onPress}>
         {isFavorite(id) && (
           <div className="absolute top-3 right-4">
             <StarIcon />

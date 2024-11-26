@@ -8,13 +8,23 @@ export const fetchMovies = async (filter: FilterItemType): Promise<Movie[]> => {
     return getFavorites();
   }
 
-  const { data } = await apiClient.get(`/movie/${filter}`);
-  return data.results;
+  try {
+    const { data } = await apiClient.get(`/movie/${filter}`);
+    return data.results;
+  } catch (err) {
+    console.log("fetchMovies error ", err);
+    return [];
+  }
 };
 
-export const fetchMovie = async (id: number): Promise<Movie[]> => {
-  const { data } = await apiClient.get(`/movie/${id}`);
-  return data;
+export const fetchMovie = async (id: number): Promise<Movie | null> => {
+  try {
+    const { data } = await apiClient.get(`/movie/${id}`);
+    return data;
+  } catch (err) {
+    console.log("fetchMovie error ", err);
+    return null;
+  }
 };
 
 const getFavorites = (): Movie[] => {

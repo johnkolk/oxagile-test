@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FilterItemEnum, FilterItemType, FilterType } from "@/types";
 import FilterItem from "./FilterItem";
 import { moviesActions, selectMoviesFilter } from "@/store/slices/moviesSlice";
 import { useAppDispatch, useAppSelector } from "@/hooks";
+import {
+  FocusContext,
+  useFocusable,
+} from "@noriginmedia/norigin-spatial-navigation";
 
 const filters: FilterType[] = [
   {
@@ -22,23 +26,33 @@ const filters: FilterType[] = [
 const Filter: React.FC = () => {
   const selectedFilter = useAppSelector(selectMoviesFilter);
   const dispatch = useAppDispatch();
+  const { ref, focused, focusSelf, focusKey } = useFocusable();
+
+  useEffect(() => {
+    // if (item.id === FilterItemEnum.Popular) focusSelf();
+    focusSelf();
+  }, [focusSelf]);
 
   const onPress = (item: FilterItemType) => {
     dispatch(moviesActions.setFilter(item));
     dispatch(moviesActions.startFetching());
   };
 
+  console.log("focusKey ", focusKey);
+
   return (
-    <nav className="flex justify-center space-x-10 py-4 mb-10">
-      {filters.map((item) => (
-        <FilterItem
-          key={item.id}
-          item={item}
-          isActive={selectedFilter === item.id}
-          onPress={onPress}
-        />
-      ))}
-    </nav>
+    <FocusContext.Provider value={focusKey}>
+      <nav ref={ref} className="flex justify-center space-x-16 py-4 mb-10">
+        {filters.map((item) => (
+          <FilterItem
+            key={item.id}
+            item={item}
+            isActive={selectedFilter === item.id}
+            onPress={onPress}
+          />
+        ))}
+      </nav>
+    </FocusContext.Provider>
   );
 };
 

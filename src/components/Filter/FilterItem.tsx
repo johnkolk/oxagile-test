@@ -1,5 +1,6 @@
 import { FilterItemType, FilterType } from "@/types";
-import cn from "clsx";
+import { cn } from "@/utils/utils";
+import { useFocusable } from "@noriginmedia/norigin-spatial-navigation";
 
 interface Props {
   item: FilterType;
@@ -8,6 +9,7 @@ interface Props {
 }
 
 const FilterItem: React.FC<Props> = ({ item, onPress, isActive }: Props) => {
+  const { ref, focused } = useFocusable();
   const { id, label } = item;
 
   const onClick = () => {
@@ -15,14 +17,14 @@ const FilterItem: React.FC<Props> = ({ item, onPress, isActive }: Props) => {
   };
 
   const className = cn([
-    "text-[20px] hover:scale-130 hover:font-bold transition-colors cursor-pointer",
+    "transition-transform cursor-pointer text-[20px] hover:scale-150",
     {
-      ["scale-120 font-bold"]: isActive,
+      "scale-150": focused || isActive,
     },
   ]);
 
   return (
-    <div className={className} onClick={onClick}>
+    <div ref={ref} className={className} onClick={onClick}>
       {label}
     </div>
   );
