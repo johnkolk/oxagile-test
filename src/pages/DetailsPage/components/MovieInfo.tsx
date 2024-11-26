@@ -9,7 +9,7 @@ const MovieInfo: React.FC<Props> = ({ item }: Props) => {
 
   return (
     <div className="text-white">
-      <h1 className="text-4xl font-bold mb-5">{title}</h1>
+      <h1 className="text-4xl font-bold my-6">{title}</h1>
       <div className="my-3">
         <p className="mb-1">
           <strong>Release Date:</strong> {release_date}

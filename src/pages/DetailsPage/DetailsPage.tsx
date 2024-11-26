@@ -13,6 +13,7 @@ import {
 import { StarIcon } from "@/components/StarIcon/StarIcon";
 import Loader from "@/components/Loader/Loader";
 import Layout from "@/components/Layout/Layout";
+import DetailsButtons from "./components/DetailsButtons";
 
 const DetailsPage: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -37,10 +38,17 @@ const DetailsPage: React.FC = () => {
   }, [navigate]);
 
   const handleBack = () => {
-    console.log("handleBack");
+    navigate(-1);
   };
 
-  if (loading) return <Loader />;
+  if (loading) {
+    return (
+      <Layout>
+        <Loader />
+      </Layout>
+    );
+  }
+
   if (!item) return <div className="text-center py-10">Movie not found!</div>;
 
   const handleAddToFavorites = () => {
@@ -55,33 +63,25 @@ const DetailsPage: React.FC = () => {
       <BackdropImage path={item.backdrop_path} />
       <div className="absolute bg-gradient bg-black w-full h-full opacity-75" />
 
-      <div className="container mx-auto px-4 pt-20 relative flex gap-10">
-        <div className="relative">
-          <MoviePoster path={item.poster_path} />
-          {favoriteMovie && (
-            <div className="absolute top-4 right-4">
-              <StarIcon />
-            </div>
-          )}
+      <div className="container mx-auto px-4 pt-20 flex flex-col md:flex-row gap-10">
+        <div className="w-full md:w-1/3 flex justify-center">
+          <div className="relative max-w-sm">
+            <MoviePoster path={item.poster_path} />
+            {favoriteMovie && (
+              <div className="absolute top-4 right-4">
+                <StarIcon />
+              </div>
+            )}
+          </div>
         </div>
 
-        <div className="pt-3">
+        <div className="w-full md:w-2/3 z-20">
           <MovieInfo item={item} />
-
-          <div className="flex gap-4">
-            <button
-              className="bg-gray-500 hover:bg-gray-400 transition-opacity text-white py-3 px-7 rounded-lg"
-              onClick={handleAddToFavorites}
-            >
-              {favoriteMovie ? "Remove from Favorites" : "Add to Favorites"}
-            </button>
-            <button
-              className="border text-white py-3 px-7 rounded-lg"
-              onClick={handleBack}
-            >
-              Back
-            </button>
-          </div>
+          <DetailsButtons
+            addFavorite={handleAddToFavorites}
+            isFavorite={favoriteMovie}
+            handleBack={handleBack}
+          />
         </div>
       </div>
     </Layout>

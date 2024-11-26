@@ -27,7 +27,10 @@ const Grid: React.FC<Props> = ({ items, onPress }: Props) => {
 
   return (
     <FocusContext.Provider value={focusKey}>
-      <div ref={ref} className="grid grid-cols-6 gap-6">
+      <div
+        ref={ref}
+        className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-6 gap-6"
+      >
         {items.map((item) => (
           <MovieCard
             key={item.id}
