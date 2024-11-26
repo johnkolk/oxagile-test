@@ -4,13 +4,15 @@ import { Movie } from "@/types";
 interface MovieState {
   loading: boolean;
   error: string | null;
-  item?: Movie;
+  item: Movie | null;
+  favorite: boolean;
 }
 
 const initialState: MovieState = {
   loading: false,
   error: null,
-  item: undefined,
+  item: null,
+  favorite: false,
 };
 
 const movieSlice = createSlice({
@@ -28,6 +30,9 @@ const movieSlice = createSlice({
     fetchError: (state, action: PayloadAction<Error>) => {
       state.loading = false;
       state.error = action.payload.message;
+    },
+    toggleFavorite: (state) => {
+      state.favorite = !state.favorite;
     },
   },
   selectors: {

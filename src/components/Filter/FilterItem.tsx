@@ -15,9 +15,9 @@ const FilterItem: React.FC<Props> = ({ item, onPress, isActive }: Props) => {
   };
 
   const className = cn([
-    "text-[20px] hover:text-blue-500 transition-colors cursor-pointer",
+    "text-[20px] hover:scale-130 hover:font-bold transition-colors cursor-pointer",
     {
-      ["text-blue-500"]: isActive,
+      ["scale-120 font-bold"]: isActive,
     },
   ]);
 

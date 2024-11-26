@@ -1,10 +1,11 @@
 import apiClient from "./apiClient";
 import { FilterItemEnum, FilterItemType, Movie } from "@/types";
 
+const FAVORITES_KEY = "favorites";
+
 export const fetchMovies = async (filter: FilterItemType): Promise<Movie[]> => {
-  // Get request to localStorage favorites movies
   if (filter === FilterItemEnum.Favorites) {
-    return getFavoritesMovies();
+    return getFavorites();
   }
 
   const { data } = await apiClient.get(`/movie/${filter}`);
@@ -16,7 +17,24 @@ export const fetchMovie = async (id: number): Promise<Movie[]> => {
   return data;
 };
 
-const getFavoritesMovies = (): Movie[] => {
-  console.log("Get Favorites Movies");
-  return [];
+const getFavorites = (): Movie[] => {
+  const favorites = localStorage.getItem(FAVORITES_KEY);
+  return favorites ? JSON.parse(favorites) : [];
+};
+
+export const isFavorite = (id?: Movie["id"]): boolean => {
+  return id ? getFavorites().some((fav) => fav.id === id) : false;
+};
+
+export const addToFavorites = (movie: Movie) => {
+  const favorites = getFavorites();
+  if (!isFavorite(movie.id)) {
+    favorites.push(movie);
+    localStorage.setItem(FAVORITES_KEY, JSON.stringify(favorites));
+  }
+};
+
+export const removeFromFavorites = (id: Movie["id"]) => {
+  const favorites = getFavorites().filter((item) => item.id !== id);
+  localStorage.setItem(FAVORITES_KEY, JSON.stringify(favorites));
 };

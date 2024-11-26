@@ -5,6 +5,14 @@ export interface Movie {
   backdrop_path: string;
   adult: string;
   overview: string;
+  release_date: string;
+  vote_average: number;
+  genres: Genre[];
+}
+
+export interface Genre {
+  id: number;
+  name: string;
 }
 
 export enum FilterItemEnum {

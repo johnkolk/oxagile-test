@@ -8,8 +8,11 @@ interface Props {
 }
 
 const Grid: React.FC<Props> = ({ items, onPress }: Props) => {
+  if (items.length === 0)
+    return <div className="text-center py-10">Movie not found</div>;
+
   return (
-    <div className="flex flex-wrap gap-4">
+    <div className="flex flex-wrap gap-5">
       {items.map((item) => (
         <MovieCard key={item.id} item={item} onPress={onPress} />
       ))}
