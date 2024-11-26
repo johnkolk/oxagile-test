@@ -2,7 +2,7 @@ import BackdropImage from "@/components/BackdropImage/BackdropImage";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { movieActions, selectMovieState } from "@/store/slices/movieSlice";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import MoviePoster from "./components/MoviePoster";
 import MovieInfo from "./components/MovieInfo";
 import {
@@ -16,6 +16,7 @@ import Layout from "@/components/Layout/Layout";
 
 const DetailsPage: React.FC = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const { id } = useParams();
   const { item, loading } = useAppSelector(selectMovieState);
   const [favoriteMovie, setFavoriteMovie] = useState(isFavorite(Number(id)));
@@ -23,6 +24,17 @@ const DetailsPage: React.FC = () => {
   useEffect(() => {
     if (id) dispatch(movieActions.startFetching(Number(id)));
   }, [dispatch, id]);
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Backspace") {
+        navigate(-1);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [navigate]);
 
   const handleBack = () => {
     console.log("handleBack");

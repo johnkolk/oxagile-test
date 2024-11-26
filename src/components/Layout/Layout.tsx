@@ -15,7 +15,7 @@ const Layout = ({ children, className }: PageProps) => {
 
   return (
     <FocusContext.Provider value={focusKey}>
-      <div ref={ref} className={cn("container mx-auto px-4", className)}>
+      <div ref={ref} className={cn("container mx-auto", className)}>
         {children}
       </div>
     </FocusContext.Provider>

@@ -9,7 +9,7 @@ interface Props {
 }
 
 const FilterItem: React.FC<Props> = ({ item, onPress, isActive }: Props) => {
-  const { ref, focused } = useFocusable();
+  const { ref, focused } = useFocusable({ onEnterPress: () => onPress(id) });
   const { id, label } = item;
 
   const onClick = () => {

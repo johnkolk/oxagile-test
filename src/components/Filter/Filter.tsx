@@ -26,10 +26,9 @@ const filters: FilterType[] = [
 const Filter: React.FC = () => {
   const selectedFilter = useAppSelector(selectMoviesFilter);
   const dispatch = useAppDispatch();
-  const { ref, focused, focusSelf, focusKey } = useFocusable();
+  const { ref, focusSelf, focusKey } = useFocusable();
 
   useEffect(() => {
-    // if (item.id === FilterItemEnum.Popular) focusSelf();
     focusSelf();
   }, [focusSelf]);
 
@@ -38,11 +37,9 @@ const Filter: React.FC = () => {
     dispatch(moviesActions.startFetching());
   };
 
-  console.log("focusKey ", focusKey);
-
   return (
     <FocusContext.Provider value={focusKey}>
-      <nav ref={ref} className="flex justify-center space-x-16 py-4 mb-10">
+      <nav ref={ref} className="flex justify-center space-x-14 py-4 mb-10">
         {filters.map((item) => (
           <FilterItem
             key={item.id}
