@@ -12,8 +12,7 @@ export const fetchMovies = async (filter: FilterItemType): Promise<Movie[]> => {
     const { data } = await apiClient.get(`/movie/${filter}`);
     return data.results;
   } catch (err) {
-    console.log("fetchMovies error ", err);
-    return [];
+    throw new Error(String(err));
   }
 };
 
@@ -22,12 +21,12 @@ export const fetchMovie = async (id: number): Promise<Movie | null> => {
     const { data } = await apiClient.get(`/movie/${id}`);
     return data;
   } catch (err) {
-    console.log("fetchMovie error ", err);
-    return null;
+    console.log("fetchMovie ", err);
+    throw new Error(String(err));
   }
 };
 
-const getFavorites = (): Movie[] => {
+export const getFavorites = (): Movie[] => {
   const favorites = localStorage.getItem(FAVORITES_KEY);
   return favorites ? JSON.parse(favorites) : [];
 };

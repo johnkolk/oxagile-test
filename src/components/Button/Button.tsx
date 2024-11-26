@@ -12,7 +12,7 @@ const Button: React.FC<Props> = ({ title, onPress }: Props) => {
   const className = cn([
     "transition-transform cursor-pointer text-[20px] text-gray-300 rounded-xl px-8 py-3 transition-all hover:text-white",
     {
-      "opacity-1 text-white bg-gray-900": focused,
+      "opacity-1 text-white bg-gray-600": focused,
     },
   ]);
 

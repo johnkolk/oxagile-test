@@ -1,7 +1,7 @@
 import React from "react";
-import Filter from "@/components/Filter/Filter";
-import MovieList from "./components/MovieList";
+import Filter from "@/pages/MainPage/components/Filter/Filter";
 import Layout from "@/components/Layout/Layout";
+import MovieList from "./components/MovieList/MovieList";
 
 const MainPage: React.FC = () => {
   return (

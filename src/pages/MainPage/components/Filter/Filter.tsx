@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import { FilterItemEnum, FilterItemType, FilterType } from "@/types";
 import FilterItem from "./FilterItem";
 import { moviesActions, selectMoviesFilter } from "@/store/slices/moviesSlice";
@@ -7,6 +7,7 @@ import {
   FocusContext,
   useFocusable,
 } from "@noriginmedia/norigin-spatial-navigation";
+import { getFavorites } from "@/services/movieApi";
 
 const filters: FilterType[] = [
   {
@@ -37,6 +38,8 @@ const Filter: React.FC = () => {
     dispatch(moviesActions.startFetching());
   };
 
+  const favoritesCount = useMemo(() => getFavorites().length, []);
+
   return (
     <FocusContext.Provider value={focusKey}>
       <nav ref={ref} className="flex justify-center space-x-2 py-4 mb-10">
@@ -46,6 +49,9 @@ const Filter: React.FC = () => {
             item={item}
             isActive={selectedFilter === item.id}
             onPress={onPress}
+            count={
+              item.id === FilterItemEnum.Favorites ? favoritesCount : undefined
+            }
           />
         ))}
       </nav>

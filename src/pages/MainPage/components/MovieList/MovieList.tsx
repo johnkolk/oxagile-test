@@ -5,6 +5,8 @@ import { moviesActions, selectMoviesState } from "@/store/slices/moviesSlice";
 import Loader from "@/components/Loader/Loader";
 import { useNavigate } from "react-router-dom";
 import { Movie } from "@/types";
+import { routes } from "@/router";
+import ErrorHint from "@/components/ErrorHint/ErrorHint";
 
 const MovieList: React.FC = () => {
   const navigate = useNavigate();
@@ -16,11 +18,12 @@ const MovieList: React.FC = () => {
   }, [dispatch]);
 
   const onPress = (id: Movie["id"]) => {
-    navigate(`/details/${id}`);
+    navigate(routes.detailsPage.link(id));
   };
 
   if (loading) <Loader />;
-  if (error) <div>Error {error}</div>;
+
+  if (error) return <ErrorHint error={error} />;
 
   return (
     <div className="container mx-auto">

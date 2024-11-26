@@ -23,7 +23,7 @@ function* fetchMovieSaga({ payload }: PayloadAction<Movie["id"]>) {
     const response: Movie = yield call(fetchMovie, payload);
     yield put(movieActions.fetchSuccess(response));
   } catch (err) {
-    yield put(moviesActions.fetchError(err as Error));
+    yield put(movieActions.fetchError(err as Error));
   }
 }
 

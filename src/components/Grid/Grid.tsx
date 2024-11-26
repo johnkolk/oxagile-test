@@ -12,7 +12,9 @@ interface Props {
 }
 
 const Grid: React.FC<Props> = ({ items, onPress }: Props) => {
-  const { ref, focusKey } = useFocusable();
+  const { ref, focusKey } = useFocusable({
+    saveLastFocusedChild: true,
+  });
 
   const onMovieFocus = useCallback(({ y }: { y: number }) => {
     window.scrollTo({
@@ -21,8 +23,8 @@ const Grid: React.FC<Props> = ({ items, onPress }: Props) => {
     });
   }, []);
 
-  if (items.length === 0) {
-    return <div className="text-center py-10">Movie not found</div>;
+  if (!items) {
+    return <div className="text-center text-white py-10">Movie not found</div>;
   }
 
   return (

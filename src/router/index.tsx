@@ -1,5 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import { MainPage, DetailsPage } from "@/pages";
+import { Movie } from "@/types";
+import NotFound from "@/components/NotFound/NotFound";
 
 export const routes = {
   mainPage: {
@@ -7,6 +9,10 @@ export const routes = {
   },
   detailsPage: {
     path: "/details/:id",
+    link: (id: Movie["id"]) => `/details/${id}`,
+  },
+  notFound: {
+    path: "*",
   },
 };
 
@@ -18,5 +24,9 @@ export const router = createBrowserRouter([
   {
     path: routes.detailsPage.path,
     element: <DetailsPage />,
+  },
+  {
+    path: routes.notFound.path,
+    element: <NotFound />,
   },
 ]);
