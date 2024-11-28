@@ -1,3 +1,5 @@
+# React + TypeScript + Vite + Redux-Saga
+
 ## Step 1
 
 Add Api key to .env
